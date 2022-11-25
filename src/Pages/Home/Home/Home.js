@@ -1,14 +1,18 @@
 import React from 'react';
-import toast from 'react-hot-toast';
+import Advertisements from '../Advertisements/Advertisements';
+import Categories from '../Categories/Categories';
+import Newsletter from '../Newsletter/Newsletter';
 import Slider from '../Slider/Slider';
 
-const Home = () => {
-    const showToast = () => {
-        toast.success('Clicked')
-    }
+const Home = () => {    
     return (
         <div>
             <Slider />
+            {
+                <Advertisements />
+            }
+            <Categories />
+            <Newsletter />
         </div>
     );
 };

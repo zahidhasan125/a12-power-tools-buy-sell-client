@@ -37,7 +37,7 @@ const Slider = () => {
 
             {
                 sliderData.map(slider => <div key={slider.id} id={`${slider.id}`} className="carousel-item relative w-full mb-8">
-                    <div className='img-gradient'>
+                    <div className='img-gradient w-full'>
                         <img src={slider.img} alt="" className="w-full" />
                     </div>
                     <div className="w-1/2 px-6 absolute flex flex-col justify-start transform -translate-y-1/2 left-0 top-1/2">

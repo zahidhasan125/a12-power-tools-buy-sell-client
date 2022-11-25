@@ -1,8 +1,22 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../BuySell.png'
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext);
+    const handleSignOut = () => {
+        logOut().then(() => { }).catch(() => { });
+    }
+    const [categories, setCategories] = useState([]);
+    
+    useEffect(() => {
+        fetch('http://localhost:5000/category')
+            .then(res => res.json())
+            .then(data => setCategories(data))
+    }, [])
+    
+
     const menuItems = <>
         <li className='hover:bg-blue-800 rounded-lg'><Link to="/">Home</Link></li>
         <li className='hover:bg-blue-800 rounded-lg' tabIndex={0}>
@@ -11,15 +25,20 @@ const Navbar = () => {
                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
             </span>
             <ul className="p-1 bg-primary z-10 rounded-b-lg">
-                <li className='hover:bg-blue-800 rounded-lg'><Link to="/">Drill</Link></li>
-                <li className='hover:bg-blue-800 rounded-lg'><Link to="/">Screwdriver</Link></li>
-                <li className='hover:bg-blue-800 rounded-lg'><Link to="/">Jigsaw</Link></li>
-                <li className='hover:bg-blue-800 rounded-lg'><Link to="/">Disc Sander</Link></li>
-                <li className='hover:bg-blue-800 rounded-lg'><Link to="/">Angle Grinder</Link></li>
+                {
+                    categories.map(category=><li key={category._id} className='hover:bg-blue-800 rounded-lg'><Link to={`/category/${category._id}`}>{category.name}</Link></li>)
+                }
             </ul>
         </li>
-        <li className='hover:bg-blue-800 rounded-lg'><Link to="/">Blogs</Link></li>
-        <li className='hover:bg-blue-800 rounded-lg btn btn-outline text-white ml-1 animate-pulse'><Link to="/login">Login</Link></li>
+        <li className='hover:bg-blue-800 rounded-lg'><Link to="/blogs">Blogs</Link></li>
+        {user ?
+            <>
+                <li className='hover:bg-blue-800 rounded-lg'><Link to="/dashboard">Dashboard</Link></li>
+                <li onClick={handleSignOut} className='hover:bg-blue-800 rounded-lg btn btn-outline text-white ml-1'><Link >Sign Out</Link></li>
+            </>
+            :
+            <li className='hover:bg-blue-800 rounded-lg btn btn-outline text-white ml-1 animate-pulse'><Link to="/login">Login</Link></li>
+        }
     </>
     return (
         <div className="navbar bg-primary text-white justify-between">
