@@ -1,7 +1,7 @@
 import React from 'react';
 import { GoVerified } from "react-icons/go";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, setSelectedProduct }) => {
     const { img, name, location, price, originalPrice, timeUsed, timePosted, seller, isVerified } = product;
     return (
         <div className="card glass h-[560px]">
@@ -17,9 +17,14 @@ const ProductCard = ({ product }) => {
                     <small>Posted On: {timePosted}</small>                    
                 </div>                
                 <div className="card-actions justify-center mt-8">
-                    <button className="btn btn-primary text-white">Buy Now</button>
+                    <label
+                        htmlFor="confirm-buy-modal"
+                        onClick={() => setSelectedProduct(product)}
+                        className="btn btn-primary text-white"
+                    >Buy Now</label>
                     <button className="btn btn-primary btn-outline text-white">Add to wishlist</button>
                 </div>
+                
             </div>
         </div>
     );
