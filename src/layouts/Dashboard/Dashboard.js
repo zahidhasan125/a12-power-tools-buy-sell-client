@@ -19,14 +19,14 @@ const Dashboard = () => {
     return (
         <div>
             <Navbar />
-            <div className="drawer drawer-mobile bg-slate-100">
+            <div className="drawer drawer-mobile bg-slate-200">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col">
+                <div className="drawer-content flex flex-col bg-slate-100">
                     <Outlet />
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-72 text-base-content bg-slate-200">
+                    <ul className="menu p-4 w-72 text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         <li><Link to="/dashboard"><AiOutlineHome className='text-2xl' />Dashboard Home</Link></li>
 
