@@ -14,7 +14,11 @@ const MyProducts = () => {
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['myproduct', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myproduct?email=${user?.email}`);
+            const res = await fetch(`http://localhost:5000/myproduct?email=${user?.email}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
+                }
+            });
             const data = await res.json();
             return data;
         }
@@ -26,7 +30,7 @@ const MyProducts = () => {
         fetch(`http://localhost:5000/myproduct/${id}`, {
             method: "DELETE",
             headers: {
-                authorization: ``
+                authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
             },
         })
             .then(res => res.json())
@@ -43,7 +47,8 @@ const MyProducts = () => {
         // fetch(`http://localhost:5000/myproduct/${id}`, {
         //     method: "PUT",
         //     headers: {
-        //         'content-type': 'application/json'
+        //         'content-type': 'application/json',
+        //          authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
         //     },
         //     body: JSON.stringify(updateDoc)
         // })

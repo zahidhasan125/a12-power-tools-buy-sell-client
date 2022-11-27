@@ -55,17 +55,16 @@ const AddProduct = () => {
                         sellerEmail: user?.email,
                         isVerified: user?.isVerified
                     }
-                    console.log(productInfo);
                     fetch('http://localhost:5000/product', {
                         method: "POST",
                         headers: {
-                            'content-type': 'application/json'
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                         },
                         body: JSON.stringify(productInfo)
                     })
                         .then(res => res.json())
                         .then(data => {
-                            console.log(data);
                             if (data.acknowledged) {
                                 toast.success('Congratulations!! Your product added Successfully.', {
                                     duration: 8000
