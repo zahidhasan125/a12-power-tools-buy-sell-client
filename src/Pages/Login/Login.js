@@ -1,15 +1,19 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
+const googleProvider = new GoogleAuthProvider()
+
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [loginError, setLoginError] = useState('');
-    const { userLogin } = useContext(AuthContext);
+    const { userLogin, providerLogin } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleLogin = data => {
+        setLoginError('')
         userLogin(data.email, data.password)
             .then(result => {
                 const user = result.user;
@@ -21,7 +25,11 @@ const Login = () => {
             })
     }
     const handleGoogleSignIn = () => {
-
+        providerLogin(googleProvider)
+            .then(result => { })
+            .catch(err => {
+                setLoginError(err.message)
+            })
     }
     return (
         <div className='flex flex-col justify-center items-center'>

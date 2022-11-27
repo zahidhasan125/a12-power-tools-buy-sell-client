@@ -5,10 +5,12 @@ import { FaAdversal, FaEdit, FaTrashAlt } from 'react-icons/fa';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Shared/Loading/Loading';
+import EditProductInfoModal from './EditProductInfoModal/EditProductInfoModal';
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
-    const [selectedProduct, setSelectedProduct] = useState(null)
+    const [selectedProduct, setSelectedProduct] = useState(null);
+    const [editingProduct, setEditingProduct] = useState(null)
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['myproduct', user?.email],
         queryFn: async () => {
@@ -31,10 +33,26 @@ const MyProducts = () => {
             .then(data => {
                 if (data.acknowledged) {
                     refetch();
-                    toast.success('Item successfully deleted!')                    
+                    toast.success('Item successfully deleted!')
                 }
-        })
+            })
     }
+
+    const handleEditProduct = (id, updateDoc) => {
+        console.log(id, updateDoc);
+        // fetch(`http://localhost:5000/myproduct/${id}`, {
+        //     method: "PUT",
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(updateDoc)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //     })
+    }
+
     const closeModal = () => {
         setSelectedProduct(null)
     }
@@ -68,14 +86,28 @@ const MyProducts = () => {
                                 <td>${product.price}</td>
                                 <td>{product.timePosted}</td>
                                 <td>
-                                    <button className='bg-primary p-2 rounded-xl tooltip mr-1' data-tip="Edit"><FaEdit className='text-white' /></button>
+                                    <label
+                                        onClick={() => setEditingProduct(product)}
+                                        className='bg-primary p-2 rounded-xl tooltip mr-1'
+                                        data-tip="Edit"
+                                        htmlFor="edit-product-info-modal"
+                                    >
+                                        <FaEdit className='text-white' />
+                                    </label>
                                     <label
                                         onClick={() => setSelectedProduct(product)}
                                         className='bg-error p-2 rounded-xl tooltip mr-1'
                                         data-tip="Delete"
                                         htmlFor="confirmation-modal"
-                                    ><FaTrashAlt className='text-white' /></label>
-                                    <button className='bg-success p-2 rounded-xl tooltip' data-tip="Advertise this item"><FaAdversal className='text-white' /></button>
+                                    >
+                                        <FaTrashAlt className='text-white' />
+                                    </label>
+                                    <label
+                                        className='bg-success p-2 rounded-xl tooltip'
+                                        data-tip="Advertise this item"
+                                    >
+                                        <FaAdversal className='text-white' />
+                                    </label>
                                 </td>
                             </tr>)
                         }
@@ -85,17 +117,27 @@ const MyProducts = () => {
                 </table>
             </div>
             {
-                            selectedProduct &&
-                            <ConfirmationModal
-                                title={`Are You Sure?`}
-                                message={`Do you want to Permanently delete ${selectedProduct?.name}?`}
-                                successAction={handleDeleteProduct}
-                                successButtonName="Delete"
-                                modalData={selectedProduct}
-                                closeModal={closeModal}
-                            >
-                            </ConfirmationModal>
-                        }
+                selectedProduct &&
+                <ConfirmationModal
+                    title={`Are You Sure?`}
+                    message={`Do you want to Permanently delete ${selectedProduct?.name}?`}
+                    successAction={handleDeleteProduct}
+                    successButtonName="Delete"
+                    modalData={selectedProduct}
+                    closeModal={closeModal}
+                >
+                </ConfirmationModal>
+            }
+            {
+                editingProduct &&
+                <EditProductInfoModal
+                    title={'Edit Product Info'}
+                    successAction={handleEditProduct}
+                    modalData={editingProduct}
+                    successButtonName="Submit"
+                    closeModal={closeModal}
+                ></EditProductInfoModal>
+            }
         </div>
     );
 };
