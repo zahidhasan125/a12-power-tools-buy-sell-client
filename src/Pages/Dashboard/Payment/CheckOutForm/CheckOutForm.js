@@ -11,10 +11,9 @@ const CheckoutForm = ({ order }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { price, userEmail, userName, _id } = order;
-    console.log(order);
 
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://buy-sell-used-power-tools-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -78,7 +77,7 @@ const CheckoutForm = ({ order }) => {
                 userEmail,
                 orderId: _id
             }
-            fetch('http://localhost:5000/payments', {
+            fetch('https://buy-sell-used-power-tools-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

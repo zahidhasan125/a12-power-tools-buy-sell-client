@@ -10,7 +10,7 @@ const AddProduct = () => {
     const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/category')
+        fetch('https://buy-sell-used-power-tools-server.vercel.app/category')
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
@@ -55,7 +55,7 @@ const AddProduct = () => {
                         sellerEmail: user?.email,
                         isVerified: user?.isVerified
                     }
-                    fetch('http://localhost:5000/product', {
+                    fetch('https://buy-sell-used-power-tools-server.vercel.app/product', {
                         method: "POST",
                         headers: {
                             'content-type': 'application/json',

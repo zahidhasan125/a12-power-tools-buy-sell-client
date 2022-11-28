@@ -10,7 +10,7 @@ const AllSellers = () => {
     const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/sellers`, {
+            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/sellers`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }
@@ -24,7 +24,7 @@ const AllSellers = () => {
     }
 
     const handleDeleteSeller = id => {
-        fetch(`http://localhost:5000/sellers/${id}`, {
+        fetch(`https://buy-sell-used-power-tools-server.vercel.app/sellers/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
@@ -36,7 +36,7 @@ const AllSellers = () => {
                     refetch();
                     toast.success('Seller Deleted Successfully!')
                 }
-        })
+            })
     }
 
     const closeModal = () => {

@@ -16,7 +16,7 @@ const MyOrders = () => {
     const { data: orderItems = [], refetch, isLoading } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/orders?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }
@@ -32,7 +32,7 @@ const MyOrders = () => {
 
 
     const handleDeleteProduct = id => {
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://buy-sell-used-power-tools-server.vercel.app/orders/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
@@ -53,7 +53,7 @@ const MyOrders = () => {
 
     return (
         <div className='my-8'>
-            <h3 className='text-3xl font-bold text-center mb-8'>My Products</h3>
+            <h3 className='text-3xl font-bold text-center mb-8'>My Orders</h3>
             <div className="overflow-x-auto px-2">
                 <table className="table w-full">
                     <thead>

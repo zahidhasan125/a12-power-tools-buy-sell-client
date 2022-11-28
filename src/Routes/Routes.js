@@ -46,7 +46,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <Products />,
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`https://buy-sell-used-power-tools-server.vercel.app/category/${params.id}`)
             },
         ]
     },
@@ -66,7 +66,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment />,
-                loader: ({params})=> fetch(`http://localhost:5000/orders/${params.id}`)
+                loader: ({ params }) => fetch(`https://buy-sell-used-power-tools-server.vercel.app/orders/${params.id}`)
             },
             {
                 path: '/dashboard/mywishlist',

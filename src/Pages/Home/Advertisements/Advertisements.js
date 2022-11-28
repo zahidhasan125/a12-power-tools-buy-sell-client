@@ -7,7 +7,7 @@ const Advertisements = () => {
     const { data: advertise = [], isLoading } = useQuery({
         queryKey: ['advertise'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/advertise`, {
+            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/advertise`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }

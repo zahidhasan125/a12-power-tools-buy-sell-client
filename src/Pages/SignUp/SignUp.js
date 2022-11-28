@@ -19,8 +19,9 @@ const SignUp = () => {
     const from = location.state?.from?.pathname || '/';
 
     if (token) {
-        navigate(from, {replace: true})
+        navigate(from, { replace: true })
     }
+
     const handleSignUp = data => {
         setSignUpError("")
         createUser(data.email, data.password)
@@ -62,7 +63,7 @@ const SignUp = () => {
 
     const saveUserToDb = (usrInfo) => {
         const user = { usrInfo }
-        fetch('http://localhost:5000/users', {
+        fetch('https://buy-sell-used-power-tools-server.vercel.app/users', {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

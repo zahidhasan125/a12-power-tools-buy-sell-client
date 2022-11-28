@@ -4,7 +4,7 @@ import CategoryCard from './CategoryCard/CategoryCard';
 const Categories = () => {
     const [productCategory, setProductCategory] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/category')
+        fetch('https://buy-sell-used-power-tools-server.vercel.app/category')
             .then(res => res.json())
             .then(data => setProductCategory(data))
     }, [])

@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 
 const useToken = email => {
     const [token, setToken] = useState('');
-
     useEffect(() => {
         if (email) {
-            fetch(`http://localhost:5000/jwt?email=${email}`)
+            fetch(`https://buy-sell-used-power-tools-server.vercel.app/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.accessToken) {

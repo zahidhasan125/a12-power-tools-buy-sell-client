@@ -10,7 +10,7 @@ const AllBuyers = () => {
     const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/buyers`, {
+            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/buyers`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }
@@ -24,7 +24,7 @@ const AllBuyers = () => {
     }
 
     const handleDeleteBuyer = id => {
-        fetch(`http://localhost:5000/buyers/${id}`, {
+        fetch(`https://buy-sell-used-power-tools-server.vercel.app/buyers/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
@@ -36,7 +36,7 @@ const AllBuyers = () => {
                     refetch();
                     toast.success('Buyer Deleted Successfully!')
                 }
-        })
+            })
     }
 
     const closeModal = () => {
@@ -64,7 +64,7 @@ const AllBuyers = () => {
                                 <td>{buyer.email}</td>
                                 <td>
                                     <label
-                                        onClick={()=>setSelectedBuyer(buyer)}
+                                        onClick={() => setSelectedBuyer(buyer)}
                                         className='bg-error p-2 rounded-xl tooltip mr-1'
                                         data-tip="Delete"
                                         htmlFor="confirmation-modal"

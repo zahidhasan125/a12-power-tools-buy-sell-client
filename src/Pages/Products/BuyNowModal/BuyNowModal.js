@@ -15,7 +15,7 @@ const BuyNowModal = ({ selectedProduct, setSelectedProduct }) => {
         const orderedProduct = { ...data, img: selectedProduct.img, productId: selectedProduct._id };
         console.log(orderedProduct);
 
-        axios.post('http://localhost:5000/orders', orderedProduct, {
+        axios.post('https://buy-sell-used-power-tools-server.vercel.app/orders', orderedProduct, {
             headers: {
                 'content-type': 'application/json',
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
