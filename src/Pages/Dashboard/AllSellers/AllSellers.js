@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaTrashAlt } from 'react-icons/fa';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Shared/Loading/Loading';
 
 const AllSellers = () => {
+    const [selectedSeller, setSelectedSeller] = useState(null);
     const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
@@ -18,6 +21,26 @@ const AllSellers = () => {
     })
     if (isLoading) {
         return <Loading />
+    }
+
+    const handleDeleteSeller = id => {
+        fetch(`http://localhost:5000/sellers/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount) {
+                    refetch();
+                    toast.success('Seller Deleted Successfully!')
+                }
+        })
+    }
+
+    const closeModal = () => {
+        setSelectedSeller(null);
     }
     return (
         <div className='my-8'>
@@ -40,6 +63,7 @@ const AllSellers = () => {
                                 <td>{seller.email}</td>
                                 <td>
                                     <label
+                                        onClick={() => setSelectedSeller(seller)}
                                         className='bg-error p-2 rounded-xl tooltip mr-1'
                                         data-tip="Delete"
                                         htmlFor="confirmation-modal"
@@ -51,6 +75,18 @@ const AllSellers = () => {
                         }
                     </tbody>
                 </table>
+                {
+                    selectedSeller &&
+                    <ConfirmationModal
+                        title={`Are You Sure?`}
+                        message={`Do you want to delete ${selectedSeller?.name}?`}
+                        successAction={handleDeleteSeller}
+                        successButtonName="Delete"
+                        modalData={selectedSeller}
+                        closeModal={closeModal}
+                    >
+                    </ConfirmationModal>
+                }
             </div>
         </div>
     );

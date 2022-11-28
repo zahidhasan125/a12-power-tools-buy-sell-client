@@ -1,9 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaTrashAlt } from 'react-icons/fa';
+import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 import Loading from '../../Shared/Loading/Loading';
 
 const AllBuyers = () => {
+    const [selectedBuyer, setSelectedBuyer] = useState(null);
     const { data: buyers = [], refetch, isLoading } = useQuery({
         queryKey: ['buyers'],
         queryFn: async () => {
@@ -19,6 +22,27 @@ const AllBuyers = () => {
     if (isLoading) {
         return <Loading />
     }
+
+    const handleDeleteBuyer = id => {
+        fetch(`http://localhost:5000/buyers/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount) {
+                    refetch();
+                    toast.success('Buyer Deleted Successfully!')
+                }
+        })
+    }
+
+    const closeModal = () => {
+        setSelectedBuyer(null);
+    }
+
     return (
         <div className='my-8'>
             <h3 className='text-3xl font-bold text-center mb-8'>All Buyers</h3>
@@ -40,6 +64,7 @@ const AllBuyers = () => {
                                 <td>{buyer.email}</td>
                                 <td>
                                     <label
+                                        onClick={()=>setSelectedBuyer(buyer)}
                                         className='bg-error p-2 rounded-xl tooltip mr-1'
                                         data-tip="Delete"
                                         htmlFor="confirmation-modal"
@@ -51,6 +76,18 @@ const AllBuyers = () => {
                         }
                     </tbody>
                 </table>
+                {
+                    selectedBuyer &&
+                    <ConfirmationModal
+                        title={`Are You Sure?`}
+                        message={`Do you want to delete ${selectedBuyer?.name}?`}
+                        successAction={handleDeleteBuyer}
+                        successButtonName="Delete"
+                        modalData={selectedBuyer}
+                        closeModal={closeModal}
+                    >
+                    </ConfirmationModal>
+                }
             </div>
         </div>
     );
