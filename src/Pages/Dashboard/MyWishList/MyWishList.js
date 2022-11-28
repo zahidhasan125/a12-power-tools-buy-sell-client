@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
 import { FaTrashAlt } from 'react-icons/fa';
 import { FcPaid } from 'react-icons/fc';
@@ -15,7 +16,7 @@ const MyWishList = () => {
     const { data: myWishListItems = [], refetch, isLoading } = useQuery({
         queryKey: ['mywishtlist', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/mywishtlist?email=${user?.email}`, {
+            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/mywishtlist?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }
@@ -33,6 +34,19 @@ const MyWishList = () => {
     }
     const handleDeleteProduct = id => {
         console.log(id);
+        fetch(`https://buy-sell-used-power-tools-server.vercel.app/mywishlist/${id}`, {
+            method: "DELETE",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount) {
+                    refetch();
+                    toast.success('Item successfully deleted!', { duration: 6000 })
+                }
+            })
     }
     return (
         <div className='my-8'>

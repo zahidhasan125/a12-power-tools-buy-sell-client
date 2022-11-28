@@ -3,6 +3,9 @@
 ## [Live Site Link](https://my-power-tools-buy-sell.web.app/)
 [https://my-power-tools-buy-sell.web.app](https://my-power-tools-buy-sell.web.app/)
 
+### Admin Email: zahidhasan@gmail.com
+### Admin Password: 123456@Zz
+
 ## Features and Function
 
 * User Login
