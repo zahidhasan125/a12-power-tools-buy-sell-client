@@ -10,7 +10,7 @@ import EditProductInfoModal from './EditProductInfoModal/EditProductInfoModal';
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [editingProduct, setEditingProduct] = useState(null)
+    const [editingProduct, setEditingProduct] = useState(null);
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['myproduct', user?.email],
         queryFn: async () => {
@@ -44,6 +44,8 @@ const MyProducts = () => {
 
     const handleEditProduct = (id, updateDoc) => {
         console.log(id, updateDoc);
+
+        
         // fetch(`http://localhost:5000/myproduct/${id}`, {
         //     method: "PUT",
         //     headers: {

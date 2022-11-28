@@ -63,6 +63,10 @@ const router = createBrowserRouter([
                 element: <MyOrders />
             },
             {
+                path: '/dashboard/paynow/:id',
+                element: <div>Confirm Payment</div>
+            },
+            {
                 path: '/dashboard/mywishlist',
                 element: <MyWishList />
             },

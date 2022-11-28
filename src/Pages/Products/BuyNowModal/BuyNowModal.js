@@ -12,7 +12,7 @@ const BuyNowModal = ({ selectedProduct, setSelectedProduct }) => {
     const navigate = useNavigate();
 
     const handleConfirm = data => {
-        const orderedProduct = { ...data, productId: selectedProduct._id };
+        const orderedProduct = { ...data, img: selectedProduct.img, productId: selectedProduct._id };
         console.log(orderedProduct);
 
         axios.post('http://localhost:5000/orders', orderedProduct, {
