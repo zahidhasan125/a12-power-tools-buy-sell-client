@@ -11,6 +11,7 @@ const MyProducts = () => {
     const { user } = useContext(AuthContext);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [editingProduct, setEditingProduct] = useState(null);
+    const [addAdvertiseProduct, setAddAdvertiseProduct] = useState(null);
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['myproduct', user?.email],
         queryFn: async () => {
@@ -42,10 +43,25 @@ const MyProducts = () => {
             })
     }
 
+    const handleAdvertise = id => {
+        fetch(`http://localhost:5000/advertise?id=${id}`, {
+            method: "PUT",
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount) {
+                    refetch()
+                }
+            })
+    }
+
     const handleEditProduct = (id, updateDoc) => {
         console.log(id, updateDoc);
 
-        
+
         // fetch(`http://localhost:5000/myproduct/${id}`, {
         //     method: "PUT",
         //     headers: {
@@ -109,12 +125,17 @@ const MyProducts = () => {
                                     >
                                         <FaTrashAlt className='text-white' />
                                     </label>
-                                    <label
-                                        className='bg-success p-2 rounded-xl tooltip'
-                                        data-tip="Advertise this item"
-                                    >
-                                        <FaAdversal className='text-white' />
-                                    </label>
+                                    {
+                                        !product.advertised &&
+                                        <label
+                                            onClick={() => setAddAdvertiseProduct(product)}
+                                            className='bg-success p-2 rounded-xl tooltip'
+                                            data-tip="Advertise this item"
+                                            htmlFor="confirmation-modal"
+                                        >
+                                            <FaAdversal className='text-white' />
+                                        </label>
+                                    }
                                 </td>
                             </tr>)
                         }
@@ -144,6 +165,18 @@ const MyProducts = () => {
                     successButtonName="Submit"
                     closeModal={closeModal}
                 ></EditProductInfoModal>
+            }
+            {
+                addAdvertiseProduct &&
+                <ConfirmationModal
+                    title={`Are You Sure?`}
+                    message={`Do you want to Advertise ${addAdvertiseProduct?.name}?`}
+                    successAction={handleAdvertise}
+                    successButtonName="Advertise"
+                    modalData={addAdvertiseProduct}
+                    closeModal={closeModal}
+                >
+                </ConfirmationModal>
             }
         </div>
     );
