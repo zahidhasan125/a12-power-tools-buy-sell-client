@@ -11,6 +11,7 @@ import MyBuyers from "../Pages/Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts/MyProducts";
 import MyWishList from "../Pages/Dashboard/MyWishList/MyWishList";
+import Payment from "../Pages/Dashboard/Payment/CheckOutForm/Payment";
 import ReportedItems from "../Pages/Dashboard/ReportedItems/ReportedItems";
 import Home from "../Pages/Home/Home/Home";
 import Login from "../Pages/Login/Login";
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
             {
                 path: '/category/:id',
                 element: <Products />,
-                loader: ({params})=> fetch(`http://localhost:5000/category/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.id}`)
             },
         ]
     },
@@ -63,8 +64,9 @@ const router = createBrowserRouter([
                 element: <MyOrders />
             },
             {
-                path: '/dashboard/paynow/:id',
-                element: <div>Confirm Payment</div>
+                path: '/dashboard/payment/:id',
+                element: <Payment />,
+                loader: ({params})=> fetch(`http://localhost:5000/orders/${params.id}`)
             },
             {
                 path: '/dashboard/mywishlist',

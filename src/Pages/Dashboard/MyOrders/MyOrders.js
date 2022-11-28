@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { AiOutlineDollarCircle } from 'react-icons/ai';
 import { FaTrashAlt } from 'react-icons/fa';
+import { FcPaid } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
 import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
@@ -78,16 +79,29 @@ const MyOrders = () => {
                                 <td>{product.productName}</td>
                                 <td>{product.price}</td>
                                 <td>
-                                    <Link to={`/dashboard/paynow/${product._id}`}>
+                                    {
+                                        product.price && !product.paid &&
+
+                                        <Link to={`/dashboard/payment/${product._id}`}>
+                                            <label
+                                                // onClick={() => setSelectedProduct(product)}
+                                                className='bg-primary p-2 rounded-xl tooltip mr-1'
+                                                data-tip="Pay Now"
+                                                htmlFor="edit-product-info-modal"
+                                            >
+                                                <AiOutlineDollarCircle className='text-white' />
+                                            </label>
+                                        </Link>
+                                    }
+                                    {
+                                        product.price && product.paid &&
                                         <label
-                                            // onClick={() => setSelectedProduct(product)}
-                                            className='bg-primary p-2 rounded-xl tooltip mr-1'
-                                            data-tip="Pay Now"
-                                            htmlFor="edit-product-info-modal"
+                                            data-tip="Paid"
+                                            className='bg-success p-2 rounded-xl tooltip mr-1'
                                         >
-                                            <AiOutlineDollarCircle className='text-white' />
+                                            <FcPaid />
                                         </label>
-                                    </Link>
+                                    }
                                     <label
                                         onClick={() => setSelectedProduct(product)}
                                         className='bg-error p-2 rounded-xl tooltip mr-1'
