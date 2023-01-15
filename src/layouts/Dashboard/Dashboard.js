@@ -6,8 +6,7 @@ import { BsBagCheck } from "react-icons/bs";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { MdReportGmailerrorred } from "react-icons/md";
 import { FaClipboardList, FaUsers } from "react-icons/fa";
-import { GrAddCircle } from "react-icons/gr";
-import { FcList } from "react-icons/fc";
+import { FcList, FcAddDatabase } from "react-icons/fc";
 import { AuthContext } from '../../contexts/AuthProvider';
 import useSeller from '../../hooks/useSeller';
 import useAdmin from '../../hooks/useAdmin';
@@ -24,9 +23,9 @@ const Dashboard = () => {
                 <div className="drawer-content flex flex-col bg-slate-100">
                     <Outlet />
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side bg-black">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-72 text-base-content">
+                    <ul className="menu p-4 w-72 text-white">
                         {/* <!-- Sidebar content here --> */}
                         <li><Link to="/dashboard"><AiOutlineHome className='text-2xl' />Dashboard Home</Link></li>
 
@@ -42,7 +41,7 @@ const Dashboard = () => {
                         {
                             isSeller &&
                             <>
-                                <li><Link to="/dashboard/addproduct"><GrAddCircle className='text-2xl' />Add Product</Link></li>
+                                <li><Link to="/dashboard/addproduct"><FcAddDatabase className='text-2xl' />Add Product</Link></li>
                                 <li><Link to="/dashboard/myproducts"><FcList className='text-2xl' />My Products</Link></li>
                                 <li><Link to="/dashboard/mybuyers"><FaUsers className='text-2xl' />My Buyers</Link></li>
 

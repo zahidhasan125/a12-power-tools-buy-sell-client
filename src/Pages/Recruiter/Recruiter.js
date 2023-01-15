@@ -19,7 +19,6 @@ const Recruiter = () => {
     }
 
     const handleRecruiterSeller = () => {
-        console.log("SR")
         userLogin(process.env.REACT_APP_rsEmail, process.env.REACT_APP_rsPass)
             .then(result => {
                 setLoggedInUserEmail(process.env.REACT_APP_rsEmail);
@@ -30,7 +29,6 @@ const Recruiter = () => {
              })
     }
     const handleRecruiterBuyer = () => {
-        console.log("BR");
         userLogin(process.env.REACT_APP_rbEmail, process.env.REACT_APP_rbPass)
             .then(result => {
                 setLoggedInUserEmail(process.env.REACT_APP_rbEmail);
@@ -41,7 +39,6 @@ const Recruiter = () => {
              })
     }
     const handleRecruiterAdmin = () => {
-        console.log("AR");
         userLogin(process.env.REACT_APP_raEmail, process.env.REACT_APP_raPass)
             .then(result => { 
                 setLoggedInUserEmail(process.env.REACT_APP_raEmail);
@@ -52,7 +49,9 @@ const Recruiter = () => {
              })
     }
     return (
-        <div className='min-h-screen max-w-screen-md bg-slate-400 mx-auto flex flex-col gap-4 justify-center items-center'>
+        <div className='min-h-screen max-w-screen-md bg-slate-200 mx-auto flex flex-col gap-4 justify-center items-center'>
+            <h2 className='text-4xl md:text-6xl lg:text-7xl font-bold '>Welcome Recruiter</h2>
+            <p className='mb-20 text-lg font-semibold'>Please select any option from below </p>
             <button onClick={handleRecruiterSeller} className='btn btn-primary btn-outline md-w-1/4'>Seller Login</button>
             <button onClick={handleRecruiterBuyer} className='btn btn-primary btn-outline md-w-1/4'>Buyer Login</button>
             <button onClick={handleRecruiterAdmin} className='btn btn-primary btn-outline md-w-1/4'>Admin Login</button>
