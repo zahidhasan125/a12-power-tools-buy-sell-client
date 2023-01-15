@@ -1,35 +1,38 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { GoVerified } from "react-icons/go";
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
-import ConfirmationModal from '../../Shared/ConfirmationModal/ConfirmationModal';
 
 const ProductCard = ({ product, setSelectedProduct }) => {
     const { user } = useContext(AuthContext);
-    const [selectedForWishList, setSelectedForWishList] = useState(null);
     const { img, name, location, price, originalPrice, timeUsed, timePosted, seller, isVerified } = product;
     const navigate = useNavigate();
 
     const handleAddToWishList = product => {
         const wishListItem = { ...product, userName: user?.displayName, userEmail: user?.email }
         console.log(wishListItem);
-        fetch(`${process.env.REACT_APP_dnsName}/mywishlist`, {
-            method: "POST",
-            headers: {
-                'content-type': 'application/json',
-                authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
-            },
-            body: JSON.stringify(wishListItem)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.acknowledged) {
-                    toast.success('Item added to WishList Successfully!')
-                    navigate('/dashboard/mywishlist')
-                }
+        if (!user) {
+            toast.success('Please Login First!');
+            navigate('/login')
+        } else {
+            fetch(`${process.env.REACT_APP_dnsName}/mywishlist`, {
+                method: "POST",
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
+                },
+                body: JSON.stringify(wishListItem)
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.acknowledged) {
+                        toast.success('Item added to WishList Successfully!')
+                        navigate('/dashboard/mywishlist')
+                    }
+                })
+        }
     }
 
 

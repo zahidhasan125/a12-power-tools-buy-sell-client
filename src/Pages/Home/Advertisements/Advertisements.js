@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import ProductCard from '../../Products/ProductCard/ProductCard';
 import Loading from '../../Shared/Loading/Loading';
+import BuyNowModal from '../../Products/BuyNowModal/BuyNowModal';
 
 const Advertisements = () => {
+    const [selectedForWishList, setSelectedForWishList] = useState(null);
     const { data: advertise = [], isLoading } = useQuery({
         queryKey: ['advertise'],
         queryFn: async () => {
@@ -29,9 +31,20 @@ const Advertisements = () => {
                     <legend className="px-2 font-bold">Advertisements</legend>
                     <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
                         {
-                            advertise.map(product => <ProductCard key={product._id} product={product} />)
+                            advertise.map(product => <ProductCard
+                                key={product._id}
+                                product={product}
+                                setSelectedProduct={setSelectedForWishList}
+                            />)
                         }
                     </div>
+                    {
+                        selectedForWishList &&
+                        <BuyNowModal
+                            selectedProduct={selectedForWishList}
+                            setSelectedProduct={selectedForWishList}
+                        />
+                    }
                 </fieldset>
             }
         </>
