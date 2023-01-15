@@ -16,7 +16,7 @@ const MyWishList = () => {
     const { data: myWishListItems = [], refetch, isLoading } = useQuery({
         queryKey: ['mywishtlist', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/mywishtlist?email=${user?.email}`, {
+            const res = await fetch(`${process.env.REACT_APP_dnsName}/mywishtlist?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }
@@ -34,7 +34,7 @@ const MyWishList = () => {
     }
     const handleDeleteProduct = id => {
         console.log(id);
-        fetch(`https://buy-sell-used-power-tools-server.vercel.app/mywishlist/${id}`, {
+        fetch(`${process.env.REACT_APP_dnsName}/mywishlist/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`

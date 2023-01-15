@@ -63,7 +63,7 @@ const SignUp = () => {
 
     const saveUserToDb = (usrInfo) => {
         const user = { usrInfo }
-        fetch('https://buy-sell-used-power-tools-server.vercel.app/users', {
+        fetch(`${process.env.REACT_APP_dnsName}/users`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

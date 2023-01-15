@@ -10,7 +10,7 @@ const AllSellers = () => {
     const { data: sellers = [], refetch, isLoading } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
-            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/sellers`, {
+            const res = await fetch(`${process.env.REACT_APP_dnsName}/sellers`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }
@@ -24,7 +24,7 @@ const AllSellers = () => {
     }
 
     const handleDeleteSeller = id => {
-        fetch(`https://buy-sell-used-power-tools-server.vercel.app/sellers/${id}`, {
+        fetch(`${process.env.REACT_APP_dnsName}/sellers/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`

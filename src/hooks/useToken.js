@@ -4,7 +4,7 @@ const useToken = email => {
     const [token, setToken] = useState('');
     useEffect(() => {
         if (email) {
-            fetch(`https://buy-sell-used-power-tools-server.vercel.app/jwt?email=${email}`)
+            fetch(`${process.env.REACT_APP_dnsName}/jwt?email=${email}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.accessToken) {

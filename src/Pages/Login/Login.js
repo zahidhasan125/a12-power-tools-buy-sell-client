@@ -1,9 +1,10 @@
 import { GoogleAuthProvider } from 'firebase/auth';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import useToken from '../../hooks/useToken';
+import { toast } from 'react-hot-toast';
 
 const googleProvider = new GoogleAuthProvider()
 
@@ -35,9 +36,38 @@ const Login = () => {
     }
     const handleGoogleSignIn = () => {
         providerLogin(googleProvider)
-            .then(result => { })
+            .then(result => {
+                setLoggedInUserEmail(result.user.email)
+                const userInfo = {
+                    name: result.user.displayName,
+                    email: result.user.email,
+                    userType: "seller"
+                }
+                console.log(userInfo);
+                saveUserToDb(userInfo);
+             })
             .catch(err => {
                 setLoginError(err.message)
+            })
+    }
+
+    const saveUserToDb = (usrInfo) => {
+        const user = { usrInfo }
+        fetch(`${process.env.REACT_APP_dnsName}/users`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    toast.success('User Created Successfully!');
+                    navigate('/login')
+                }
             })
     }
     return (

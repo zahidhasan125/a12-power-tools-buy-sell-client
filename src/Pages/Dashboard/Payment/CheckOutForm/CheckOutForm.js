@@ -77,7 +77,7 @@ const CheckoutForm = ({ order }) => {
                 userEmail,
                 orderId: _id
             }
-            fetch('https://buy-sell-used-power-tools-server.vercel.app/payments', {
+            fetch(`${process.env.REACT_APP_dnsName}/payments`, {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json',

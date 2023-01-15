@@ -15,7 +15,7 @@ const MyProducts = () => {
     const { data: myProducts = [], refetch, isLoading } = useQuery({
         queryKey: ['myproduct', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/myproduct?email=${user?.email}`, {
+            const res = await fetch(`${process.env.REACT_APP_dnsName}/myproduct?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }
@@ -28,7 +28,7 @@ const MyProducts = () => {
         return <Loading />
     }
     const handleDeleteProduct = id => {
-        fetch(`https://buy-sell-used-power-tools-server.vercel.app/myproduct/${id}`, {
+        fetch(`${process.env.REACT_APP_dnsName}/myproduct/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
@@ -44,7 +44,7 @@ const MyProducts = () => {
     }
 
     const handleAdvertise = id => {
-        fetch(`https://buy-sell-used-power-tools-server.vercel.app/advertise?id=${id}`, {
+        fetch(`${process.env.REACT_APP_dnsName}/advertise?id=${id}`, {
             method: "PUT",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
@@ -62,7 +62,7 @@ const MyProducts = () => {
         console.log(id, updateDoc);
 
 
-        // fetch(`https://buy-sell-used-power-tools-server.vercel.app/myproduct/${id}`, {
+        // fetch(`${process.env.REACT_APP_dnsName}/myproduct/${id}`, {
         //     method: "PUT",
         //     headers: {
         //         'content-type': 'application/json',

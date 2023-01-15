@@ -14,7 +14,7 @@ const ProductCard = ({ product, setSelectedProduct }) => {
     const handleAddToWishList = product => {
         const wishListItem = { ...product, userName: user?.displayName, userEmail: user?.email }
         console.log(wishListItem);
-        fetch('https://buy-sell-used-power-tools-server.vercel.app/mywishlist', {
+        fetch(`${process.env.REACT_APP_dnsName}/mywishlist`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json',

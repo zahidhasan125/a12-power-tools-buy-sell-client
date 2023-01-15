@@ -11,7 +11,7 @@ const Navbar = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        fetch('https://buy-sell-used-power-tools-server.vercel.app/category')
+        fetch(`${process.env.REACT_APP_dnsName}/category`)
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])

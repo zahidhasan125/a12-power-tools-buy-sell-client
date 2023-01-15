@@ -16,7 +16,7 @@ const MyOrders = () => {
     const { data: orderItems = [], refetch, isLoading } = useQuery({
         queryKey: ['orders', user?.email],
         queryFn: async () => {
-            const res = await fetch(`https://buy-sell-used-power-tools-server.vercel.app/orders?email=${user?.email}`, {
+            const res = await fetch(`${process.env.REACT_APP_dnsName}/orders?email=${user?.email}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
                 }
@@ -32,7 +32,7 @@ const MyOrders = () => {
 
 
     const handleDeleteProduct = id => {
-        fetch(`https://buy-sell-used-power-tools-server.vercel.app/orders/${id}`, {
+        fetch(`${process.env.REACT_APP_dnsName}/orders/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
