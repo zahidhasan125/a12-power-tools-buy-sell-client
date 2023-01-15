@@ -20,6 +20,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import AdminRoute from "./AdminRoute/AdminRoute";
 import PrivateRoutes from "./PrivateRoutes/PrivateRoutes";
 import SellerRoute from "./SellerRoute/SellerRoute";
+import Recruiter from "../Pages/Recruiter/Recruiter";
 
 const router = createBrowserRouter([
     {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
                 element: <Products />,
                 loader: ({ params }) => fetch(`${process.env.REACT_APP_dnsName}/category/${params.id}`)
             },
+            {
+                path: '/recruiter',
+                element: <Recruiter />
+            }
         ]
     },
     {
@@ -95,7 +100,7 @@ const router = createBrowserRouter([
             {
                 path: '/dashboard/reporteditems',
                 element: <AdminRoute><ReportedItems /></AdminRoute>
-            }
+            }            
         ]
     }
 ])

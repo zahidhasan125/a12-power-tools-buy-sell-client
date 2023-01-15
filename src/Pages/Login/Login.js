@@ -89,6 +89,7 @@ const Login = () => {
                     {loginError && <p className='text-red-700 font-bold'>{loginError?.split('/')[1].slice(0, -2)}</p>}
                     <input className="btn btn-sm w-full my-2 bg-primary text-white" type='submit' value='Login' />
                 </form>
+                <Link to="/recruiter" ><input className="btn btn-sm w-full my-2 bg-primary text-white" type='submit' value='Recruiter Login' /></Link>
                 <p>New to Doctors Portal? <Link to='/sign-up' className='text-primary'>Create new account</Link></p>
                 <div className="divider">OR</div>
                 <button onClick={handleGoogleSignIn} className='btn btn-outline btn-primary btn-sm w-full dark:text-white'>CONTINUE WITH GOOGLE</button>
