@@ -29,25 +29,28 @@ const MyWishList = () => {
     if (isLoading) {
         return <Loading />;
     }
-    const closeModal = () => {
-        setSelectedProduct(null)
-    }
+    
     const handleDeleteProduct = id => {
-        console.log(id);
         fetch(`${process.env.REACT_APP_dnsName}/mywishlist/${id}`, {
             method: "DELETE",
             headers: {
                 authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
             }
         })
-            .then(res => res.json())
-            .then(data => {
+        .then(res => res.json())
+        .then(data => {
+                console.log(data);
                 if (data.deletedCount) {
                     refetch();
                     toast.success('Item successfully deleted!', { duration: 6000 })
                 }
             })
     }
+
+    const closeModal = () => {
+        setSelectedProduct(null)
+    }
+
     return (
         <div className='my-8'>
             <h3 className='text-3xl font-bold text-center mb-8'>My Wishlist</h3>
@@ -81,7 +84,7 @@ const MyWishList = () => {
 
                                         <Link to={`/dashboard/payment/${product._id}`}>
                                             <label
-                                                // onClick={() => setSelectedProduct(product)}
+                                                onClick={() => setSelectedProduct(product)}
                                                 className='bg-primary p-2 rounded-xl tooltip mr-1'
                                                 data-tip="Pay Now"
                                                 htmlFor="edit-product-info-modal"

@@ -1,38 +1,32 @@
 import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { GoVerified } from "react-icons/go";
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthProvider';
+import axios from 'axios';
 
 const ProductCard = ({ product, setSelectedProduct }) => {
     const { user } = useContext(AuthContext);
     const { img, name, location, price, originalPrice, timeUsed, timePosted, seller, isVerified } = product;
-    const navigate = useNavigate();
 
     const handleAddToWishList = product => {
         const wishListItem = { ...product, userName: user?.displayName, userEmail: user?.email }
         console.log(wishListItem);
-        if (!user) {
-            toast.success('Please Login First!');
-            navigate('/login')
-        } else {
-            fetch(`${process.env.REACT_APP_dnsName}/mywishlist`, {
-                method: "POST",
-                headers: {
-                    'content-type': 'application/json',
-                    authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
-                },
-                body: JSON.stringify(wishListItem)
+        axios.post(`${process.env.REACT_APP_dnsName}/mywishlist`, wishListItem, {
+            headers: {
+                'content-type': 'application/json',
+                authorization: `Bearer ${localStorage.getItem('buy-sell-power-tools-token')}`
+            }
+        })
+            .then(res => {
+                console.log(res.data);
+                if (res.data.acknowledged) {
+                    toast.success('This product is added to your wishlist.');
+                    setSelectedProduct(null);
+                }
             })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    if (data.acknowledged) {
-                        toast.success('Item added to WishList Successfully!')
-                        navigate('/dashboard/mywishlist')
-                    }
-                })
-        }
+            .catch(err => {
+                console.error(err);
+            })
     }
 
 

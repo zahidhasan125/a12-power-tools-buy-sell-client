@@ -6,7 +6,7 @@ import BuyNowModal from '../../Products/BuyNowModal/BuyNowModal';
 
 const Advertisements = () => {
     const [selectedForWishList, setSelectedForWishList] = useState(null);
-    const { data: advertise = [], isLoading } = useQuery({
+    const { data: advertised = [], isLoading } = useQuery({
         queryKey: ['advertise'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_dnsName}/advertise`, {
@@ -26,12 +26,12 @@ const Advertisements = () => {
     return (
         <>
             {
-                advertise.length > 0 &&
+                advertised.length > 0 &&
                 <fieldset className="border border-solid border-primary rounded-xl p-3 m-2">
                     <legend className="px-2 font-bold">Advertisements</legend>
-                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                    <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
                         {
-                            advertise.map(product => <ProductCard
+                            advertised.map(product => <ProductCard
                                 key={product._id}
                                 product={product}
                                 setSelectedProduct={setSelectedForWishList}
@@ -42,7 +42,7 @@ const Advertisements = () => {
                         selectedForWishList &&
                         <BuyNowModal
                             selectedProduct={selectedForWishList}
-                            setSelectedProduct={selectedForWishList}
+                            setSelectedProduct={setSelectedForWishList}
                         />
                     }
                 </fieldset>
