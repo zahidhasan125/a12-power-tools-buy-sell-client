@@ -31,6 +31,17 @@ const Navbar = () => {
             </ul>
         </li>
         <li className='hover:bg-blue-800 rounded-lg'><Link to="/blogs">Blogs</Link></li>
+        <li className='hover:bg-blue-800 rounded-lg dropdown'>
+            <span tabIndex={0}>
+                Pages
+                <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
+            </span>
+            <ul tabIndex={0} className="font-bold p-2 bg-primary shadow rounded-box z-50 w-52">
+                <li className='hover:bg-blue-800 rounded-lg'><a target="_blank" href="https://mdzahidhasan-portfolio.web.app/" rel="noreferrer">About Me</a></li>
+                <li className='hover:bg-blue-800 rounded-lg'><Link to="/404">404 Page</Link></li>
+                <li className='hover:bg-blue-800 rounded-lg'><a target="_blank" href="https://mdzahidhasan-portfolio.web.app/" rel="noreferrer">Contact Me</a></li>
+            </ul>
+        </li>
         {user ?
             <>
                 <li className='hover:bg-blue-800 rounded-lg'><Link to="/dashboard">Dashboard</Link></li>
