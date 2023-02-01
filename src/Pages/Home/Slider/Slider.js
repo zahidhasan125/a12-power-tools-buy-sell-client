@@ -4,6 +4,9 @@ import slider2 from '../../../assets/slider/slider2.jpg';
 import slider3 from '../../../assets/slider/slider3.jpg';
 import slider4 from '../../../assets/slider/slider4.jpg';
 import './Slider.css'
+import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../../contexts/AuthProvider';
 
 const Slider = () => {
     const sliderData = [
@@ -31,7 +34,8 @@ const Slider = () => {
             next: 1,
             prev: 3
         },
-    ]
+    ];
+    const { user } = useContext(AuthContext);
     return (
         <div className="carousel w-full">
 
@@ -41,10 +45,10 @@ const Slider = () => {
                         <img src={slider.img} alt="" className="w-full" />
                     </div>
                     <div className="w-1/2 px-6 absolute flex flex-col justify-start transform -translate-y-1/2 left-0 top-1/2">
-                        <h2 className='text-white text-6xl font-extrabold'>We're Waiting For Your Tools</h2>
-                        <h4 className='text-white text-2xl my-10'>Post Your Used Products</h4>
+                        <h2 className='text-white lg:text-6xl font-extrabold'>We're Waiting For Your Tools</h2>
+                        <h4 className='text-white lg:text-2xl my-10 hidden md:block'>Post Your Used Products</h4>
                         <div className="navbar-end">
-                            <button className="btn btn-outline btn-primary bg-base-100 text-primary">Get started</button>
+                            <Link to={user ? '/dashboard' : '/login'}><button className="btn btn-outline btn-primary bg-base-100 text-primary">Get started</button></Link>
                         </div>
                     </div>
                     <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">

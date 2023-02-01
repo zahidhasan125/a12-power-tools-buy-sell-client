@@ -48,7 +48,10 @@ const Navbar = () => {
                 <li onClick={handleSignOut} className='hover:bg-blue-800 rounded-lg btn btn-outline text-white ml-1'><Link >Sign Out</Link></li>
             </>
             :
+            <>
             <li className='hover:bg-blue-800 rounded-lg btn btn-outline text-white ml-1 animate-pulse'><Link to="/login">Login</Link></li>
+            {/* <li className='hover:bg-blue-800 rounded-lg btn btn-outline text-white ml-1 animate-pulse'><Link to="/recruiter">Recruiter Login</Link></li> */}
+            </>
         }
     </>
     return (

@@ -49,9 +49,10 @@ const Recruiter = () => {
              })
     }
     return (
-        <div className='min-h-screen max-w-screen-md bg-slate-200 mx-auto flex flex-col gap-4 justify-center items-center'>
+        <div className='max-w-screen-md bg-slate-200 mx-auto flex flex-col gap-4 justify-center items-center my-10 p-10'>
             <h2 className='text-4xl md:text-6xl lg:text-7xl font-bold '>Welcome Recruiter</h2>
-            <p className='mb-20 text-lg font-semibold'>Please select any option from below </p>
+            <p className='text-lg font-semibold'>Please select any option from below </p>
+            <small>Passwordless Login</small>
             <button onClick={handleRecruiterBuyer} className='btn btn-primary btn-outline md-w-1/4'>Buyer Login</button>
             <button onClick={handleRecruiterSeller} className='btn btn-primary btn-outline md-w-1/4'>Seller Login</button>
             <button onClick={handleRecruiterAdmin} className='btn btn-primary btn-outline md-w-1/4'>Admin Login</button>

@@ -4,7 +4,7 @@ import { MdOutlineHealthAndSafety, MdOutlineLocalOffer, MdSupportAgent } from 'r
 
 const Offers = () => {
     return (
-        <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-2 my-8'>
+        <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-2 my-8 gap-1'>
             <div className='flex items-center justify-around border-2 border-primary p-4'>
                 <MdOutlineLocalOffer className='text-6xl text-primary' />
                 <div>
