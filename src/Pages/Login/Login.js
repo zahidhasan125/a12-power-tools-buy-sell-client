@@ -13,7 +13,7 @@ const Login = () => {
     const [loginError, setLoginError] = useState('');
     const [loggedInUserEmail, setLoggedInUserEmail] = useState('');
     const [token] = useToken(loggedInUserEmail);
-    const { userLogin, providerLogin } = useContext(AuthContext);
+    const { user, userLogin, providerLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
@@ -28,7 +28,8 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setLoggedInUserEmail(data.email)
+                setLoggedInUserEmail(data.email);
+                navigate(from, { replace: true });
             })
             .catch(err => {
                 setLoginError(err.message)
@@ -45,6 +46,7 @@ const Login = () => {
                 }
                 console.log(userInfo);
                 saveUserToDb(userInfo);
+                navigate(from, { replace: true });
              })
             .catch(err => {
                 setLoginError(err.message)
@@ -66,7 +68,6 @@ const Login = () => {
                 console.log(data);
                 if (data.acknowledged) {
                     toast.success('User Created Successfully!');
-                    navigate('/login')
                 }
             })
     }
