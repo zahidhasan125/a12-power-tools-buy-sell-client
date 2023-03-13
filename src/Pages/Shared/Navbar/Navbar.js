@@ -24,7 +24,7 @@ const Navbar = () => {
                 Category
                 <svg className="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" /></svg>
             </span>
-            <ul tabIndex={0} className="font-bold p-2 bg-primary shadow rounded-box z-50 w-36">
+            <ul tabIndex={0} className="font-bold p-2 bg-primary rounded-box z-50 w-36">
                 {
                     categories.map(category => <li key={category._id} className='rounded-lg border mb-1'><Link to={`/category/${category._id}`}>{category.name}</Link></li>)
                 }
@@ -48,14 +48,14 @@ const Navbar = () => {
 
     </>
     return (
-        <div className="navbar bg-primary text-white justify-between sticky top-0 z-30">
+        <div className="navbar bg-primary text-black justify-between sticky top-0 z-30">
             <div className="navbar-start">
                 <div className="navbar-end lg:hidden">
                     <div className="dropdown dropdown-start ">
                         <label tabIndex={1} className="btn btn-ghost btn-sm lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
                         </label>
-                        <ul tabIndex={1} className="menu menu-compact font-bold dropdown-content mt-3 p-2 bg-primary shadow rounded-box w-52">
+                        <ul tabIndex={1} className="menu menu-compact font-bold dropdown-content mt-3 p-2 bg-primary rounded-box w-52">
                             {menuItems}
                         </ul>
                     </div>

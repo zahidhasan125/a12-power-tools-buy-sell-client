@@ -3,7 +3,7 @@ import React from 'react';
 const LimitedOffers = () => {
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 mx-2 my-8 gap-6'>
-            <div className='w-full bg-primary text-white flex p-6 gap-10 flex-col md:flex-row'>
+            <div className='w-full bg-primary text-black flex p-6 gap-10 flex-col md:flex-row'>
                 <div>
                     <h6 className='text-3xl font-semibold'>Big sale countdown</h6>
                     <h2 className='text-7xl font-bold my-2'>Hurry Up!</h2>

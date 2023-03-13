@@ -91,7 +91,11 @@ const Login = () => {
                     {loginError && <p className='text-red-700 font-bold'>{loginError?.split('/')[1].slice(0, -2)}</p>}
                     <input className="btn btn-sm w-full my-2 bg-primary text-white" type='submit' value='Login' />
                 </form>
-                <p className='text-primary font-semibold my-2'>Are you a Recruiter? <Link to='/recruiter' className='text-white bg-primary rounded-sm text-xs p-1'>Check the Password-less login</Link></p>
+                {/* <p className='text-primary font-semibold my-2'>Are you a Recruiter? <Link to='/recruiter' className='text-white bg-primary rounded-sm text-xs p-1'>Check the Password-less login</Link></p> */}
+                <div className='text-xs py-2'>
+                    <p>Admin Email: recruiteradmin@test.com</p>
+                    <p>Admin Password: 123456@Ra</p>
+                </div>
                 <p>New to Doctors Portal? <Link to='/sign-up' className='text-primary'>Create new account</Link></p>
                 <div className="divider">OR</div>
                 <button onClick={handleGoogleSignIn} className='btn btn-outline btn-primary btn-sm w-full dark:text-white'>CONTINUE WITH GOOGLE</button>
