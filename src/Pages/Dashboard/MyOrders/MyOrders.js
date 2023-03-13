@@ -30,6 +30,7 @@ const MyOrders = () => {
         return <Loading />;
     }
 
+    console.log(selectedProduct)
 
     const handleDeleteProduct = id => {
         fetch(`${process.env.REACT_APP_dnsName}/orders/${id}`, {
@@ -123,7 +124,7 @@ const MyOrders = () => {
                 selectedProduct &&
                 <ConfirmationModal
                     title={`Are You Sure?`}
-                    message={`Do you want to Permanently delete ${selectedProduct?.name}?`}
+                    message={`Do you want to Permanently delete ${selectedProduct?.productName}?`}
                     successAction={handleDeleteProduct}
                     successButtonName="Delete"
                     modalData={selectedProduct}

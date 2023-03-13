@@ -12,7 +12,7 @@ const Slider = () => {
     const sliderData = [
         {
             id: 1,
-            img: slider4,
+            img: slider1,
             next: 2,
             prev: 4
         },
@@ -30,7 +30,7 @@ const Slider = () => {
         },
         {
             id: 4,
-            img: slider1,
+            img: slider4,
             next: 1,
             prev: 3
         },

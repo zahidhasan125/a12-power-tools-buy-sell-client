@@ -7,7 +7,7 @@ module.exports = {
     themes: [
       {
         powerTollsTheme: {
-          primary: '#00004A',
+          primary: '#7ed957',
           secondary: '#19D3AE',
           neutral: '#3A4256',
           "base-100": "#ffffff",

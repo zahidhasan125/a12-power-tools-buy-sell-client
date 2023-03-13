@@ -22,9 +22,9 @@ const LimitedOffers = () => {
             </div>
             <div className='text-center bg-gray-800 text-white'>
                 <div className='border-4 border-white m-8 h-auto p-4'>
-                    <p className='font-semibold text-xl'>Original Products <span className='text-blue-600'>2022</span></p>
+                    <p className='font-semibold text-xl'>Original Products <span className='text-primary'>2022</span></p>
                     <h3 className='text-5xl font-bold'>Discover new arrivals</h3>
-                    <p className='text-blue-600 text-xl'>1000+ spare parts</p>
+                    <p className='text-primary text-xl'>1000+ spare parts</p>
                 </div>
             </div>
         </div>

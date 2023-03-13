@@ -82,8 +82,8 @@ const SignUp = () => {
             })
     }
     return (
-        <div className='flex flex-col justify-center items-center'>
-            <div className='w-96 p-6 dark:bg-slate-800 rounded-xl'>
+        <div className='flex flex-col justify-center items-center py-8'>
+            <div className='w-96 p-6 dark:bg-slate-800 dark:text-white rounded-xl'>
                 <h2 className='text-xl font-bold text-center'>Sign Up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)}>
                     <div className="form-control w-full dark:text-black">

@@ -13,7 +13,7 @@ const Login = () => {
     const [loginError, setLoginError] = useState('');
     const [loggedInUserEmail, setLoggedInUserEmail] = useState('');
     const [token] = useToken(loggedInUserEmail);
-    const { user, userLogin, providerLogin } = useContext(AuthContext);
+    const {userLogin, providerLogin } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation()
     const from = location.state?.from?.pathname || '/'
@@ -46,7 +46,7 @@ const Login = () => {
                 }
                 console.log(userInfo);
                 saveUserToDb(userInfo);
-                navigate(from, { replace: true });
+                
              })
             .catch(err => {
                 setLoginError(err.message)
@@ -68,12 +68,13 @@ const Login = () => {
                 console.log(data);
                 if (data.acknowledged) {
                     toast.success('User Created Successfully!');
+                    navigate(from, { replace: true });
                 }
             })
     }
     return (
-        <div className='flex flex-col justify-center items-center'>
-            <div className='w-96 p-6 dark:bg-slate-800 rounded-xl'>
+        <div className='flex flex-col justify-center items-center py-8'>
+            <div className='w-96 p-6 dark:bg-slate-800 dark:text-white rounded-xl'>
                 <h2 className='text-xl font-bold text-center'>LOGIN</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>
                     <div className="form-control w-full dark:text-black ">
@@ -88,12 +89,12 @@ const Login = () => {
                         <Link to="/forget"><label className="label"><span className="label-text dark:text-white cursor-pointer">Forget password?</span></label></Link>
                     </div>
                     {loginError && <p className='text-red-700 font-bold'>{loginError?.split('/')[1].slice(0, -2)}</p>}
-                    <input className="btn btn-md w-full my-2 bg-primary text-white" type='submit' value='Login' />
+                    <input className="btn btn-sm w-full my-2 bg-primary text-white" type='submit' value='Login' />
                 </form>
-                <p className='text-black font-semibold my-2'>Are you a Recruiter? <Link to='/recruiter' className='text-white bg-primary rounded-sm text-xs p-1'>Check the Password-less login</Link></p>
+                <p className='text-primary font-semibold my-2'>Are you a Recruiter? <Link to='/recruiter' className='text-white bg-primary rounded-sm text-xs p-1'>Check the Password-less login</Link></p>
                 <p>New to Doctors Portal? <Link to='/sign-up' className='text-primary'>Create new account</Link></p>
                 <div className="divider">OR</div>
-                <button onClick={handleGoogleSignIn} className='btn btn-outline btn-primary btn-md w-full dark:text-white'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignIn} className='btn btn-outline btn-primary btn-sm w-full dark:text-white'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
     );
