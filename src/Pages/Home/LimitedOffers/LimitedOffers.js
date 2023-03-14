@@ -14,7 +14,7 @@ const LimitedOffers = () => {
                         <h1 className='text-8xl font-bold'>75</h1>
                         <div>
                             <h2 className='text-6xl font-semibold'>%</h2>
-                            <h className='text-md font-bold'>OFF</h>
+                            <h2 className='text-md font-bold'>OFF</h2>
                         </div>
                     </div>
                     <button className='btn btn-outline btn-accent'>View Details</button>

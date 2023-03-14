@@ -23,12 +23,12 @@ const Login = () => {
     }
 
     const handleLogin = data => {
-        setLoginError('')
+        setLoginError('');
+        setLoggedInUserEmail(data.email);
         userLogin(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                setLoggedInUserEmail(data.email);
                 navigate(from, { replace: true });
             })
             .catch(err => {
